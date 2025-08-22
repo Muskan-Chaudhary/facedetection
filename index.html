@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Face Recognition System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h1>Advanced Face Detection And Recognition System</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- System Overview -->
+            <section class="overview-section">
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Known Faces</h3>
+                            <p class="card-number" id="knownFacesCount">4</p>
+                            <p class="card-label">Authorized Personnel</p>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Test Images</h3>
+                            <p class="card-number" id="testImagesCount">10</p>
+                            <p class="card-label">Ready for Analysis</p>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Processing Time</h3>
+                            <p class="card-number" id="processingTime">--</p>
+                            <p class="card-label">Average per Image</p>
+                        </div>
+                    </div> -->
+                </div>
+            </section>
+
+            <!-- Control Panel -->
+            <section class="control-section">
+                <div class="control-panel">
+                    <div class="panel-header">
+                        <h2><i class="fas fa-cogs"></i> Control Panel</h2>
+                        <p>Manage system operations and view results</p>
+                    </div>
+
+                    <div class="control-buttons">
+                        <button class="btn btn-info" id="webcamBtn">
+                            <i class="fas fa-video"></i>
+                            Live Webcam
+                        </button>
+                        <button class="btn btn-warning" id="uploadBtn">
+                            <i class="fas fa-upload"></i>
+                            Upload Image
+                        </button>
+                        <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                        <button class="btn btn-primary" id="startAnalysis">
+                            <i class="fas fa-play"></i>
+                            Start Analysis
+                        </button>
+                        <button class="btn btn-secondary" id="stopAnalysis" disabled>
+                            <i class="fas fa-stop"></i>
+                            Stop Analysis
+                        </button>
+
+                    </div>
+
+                    <div class="control-options mt-3">
+                        <div class="sound-control">
+                            <label class="sound-toggle">
+                                <input type="checkbox" id="soundToggle" checked>
+                                <span class="toggle-slider"></span>
+                                <i class="fas fa-volume-up"></i>
+                                Sound Effects
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Image Processing Section -->
+            <section class="processing-section" id="processingSection" style="display: none;">
+                <div class="processing-header">
+                    <h2><i class="fas fa-eye"></i> Live Face Detection & Recognition</h2>
+                    <p>Real-time analysis with visual feedback</p>
+                </div>
+
+                <div class="processing-container">
+                    <div class="image-display">
+                        <div class="image-container" id="imageContainer">
+                            <img id="currentImage" src="" alt="Processing Image">
+                            <div class="face-overlays" id="faceOverlays"></div>
+                            <div class="processing-overlay" id="processingOverlay">
+                                <div class="scanning-line"></div>
+                                <div class="processing-text">Analyzing faces...</div>
+                            </div>
+                        </div>
+                        <div class="image-info">
+                            <h3 id="currentImageName">Image Name</h3>
+                            <div class="image-stats">
+                                <span class="stat">
+                                    <i class="fas fa-faces"></i>
+                                    <span id="detectedFaces">0</span> faces detected
+                                </span>
+                                <span class="stat">
+                                    <i class="fas fa-clock"></i>
+                                    <span id="processingStatus">Ready</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recognition-panel">
+                        <h3><i class="fas fa-brain"></i> Recognition Results</h3>
+                        <div class="recognition-results" id="recognitionResults">
+                            <div class="no-results">
+                                <i class="fas fa-search"></i>
+                                <p>No faces analyzed yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Results -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-header">
+                    <h2><i class="fas fa-chart-bar"></i> Analysis Results</h2>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                </div>
+
+                <div class="results-grid" id="resultsGrid">
+                    <!-- Results will be populated here -->
+                </div>
+            </section>
+
+            <!-- System Status -->
+            <section class="status-section">
+                <div class="status-grid">
+                    <div class="status-card">
+                        <h3><i class="fas fa-info-circle"></i> System Information</h3>
+                        <div class="status-list">
+                            <div class="status-item">
+                                <span class="label">Algorithm:</span>
+                                <span class="value">Face Recognition API v1.3.0</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="label">Detection Method:</span>
+                                <span class="value">HOG + CNN Hybrid</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="label">Tolerance Level:</span>
+                                <span class="value">0.6 (High Security)</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="label">Last Updated:</span>
+                                <span class="value" id="lastUpdated">--</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="status-card">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <div class="activity-log" id="activityLog">
+                            <div class="activity-item">
+                                <span class="time">14:32:15</span>
+                                <span class="message">System initialized successfully</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="time">14:32:18</span>
+                                <span class="message">Known faces database loaded</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="time">14:32:20</span>
+                                <span class="message">Ready for analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Advanced Face Recognition System</p>
+                <div class="footer-links">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div class="modal" id="loadingModal">
+        <div class="modal-content">
+            <div class="loading-spinner"></div>
+            <h3>Processing Images</h3>
+            <p id="loadingMessage">Initializing face recognition algorithm...</p>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="modalProgressFill"></div>
+                </div>
+                <span class="progress-text" id="modalProgressText">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal" id="resultsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Analysis Complete</h3>
+                <button class="close-btn" id="closeResultsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="final-summary" id="finalSummary">
+                    <!-- Final summary will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Webcam Modal -->
+    <div class="modal" id="webcamModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3><i class="fas fa-video"></i> Live Face Detection & Recognition</h3>
+                <button class="close-btn" id="closeWebcamModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="webcam-container">
+                    <div class="webcam-video-container">
+                        <video id="webcamVideo" autoplay playsinline muted></video>
+                        <canvas id="webcamCanvas" style="display: none;"></canvas>
+                        <div class="webcam-overlays" id="webcamOverlays"></div>
+                        <div class="webcam-processing-overlay" id="webcamProcessingOverlay">
+                            <div class="scanning-line"></div>
+                            <div class="processing-text">Initializing webcam...</div>
+                        </div>
+                    </div>
+
+                    <div class="webcam-controls">
+                        <button class="btn btn-primary" id="startWebcam">
+                            <i class="fas fa-play"></i>
+                            Start Webcam
+                        </button>
+                        <button class="btn btn-secondary" id="stopWebcam" disabled>
+                            <i class="fas fa-stop"></i>
+                            Stop Webcam
+                        </button>
+                        <button class="btn btn-success" id="captureFrame">
+                            <i class="fas fa-camera"></i>
+                            Capture Frame
+                        </button>
+                    </div>
+
+                    <div class="webcam-results">
+                        <h4><i class="fas fa-users"></i> Detected Faces</h4>
+                        <div class="webcam-faces-list" id="webcamFacesList">
+                            <div class="no-faces">
+                                <i class="fas fa-search"></i>
+                                <p>No faces detected yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements for sound effects -->
+    <audio id="successSound" preload="auto">
+        <source src="success.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="denialSound" preload="auto">
+        <source src="denial.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
