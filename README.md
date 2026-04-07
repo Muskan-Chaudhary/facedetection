@@ -1,11 +1,11 @@
-# Advanced Face Recognition System - Defense Forces Edition
+# Advanced Face Recognition System
 
-A professional web-based interface for the Advanced Face Recognition System, designed specifically for defense forces presentations and demonstrations. **Now with real Python backend integration using your accurate `faced.py` logic!**
+A professional web-based interface for the Advanced Face Recognition System.
 
 ## 🚀 Features
 
-- **Real Face Recognition**: Uses your proven `faced.py` Python code for accurate detection
-- **Professional UI/UX**: Clean, modern interface suitable for defense forces presentations
+- **Real Face Recognition**: Uses various libraries and different checks for accurate detection
+- **Professional UI/UX**: Clean, modern interface 
 - **Live Visual Feedback**: Real-time face detection with bounding boxes and labels
 - **Interactive Controls**: Start, stop, and reset system operations
 - **Progress Tracking**: Visual progress bars and real-time updates
@@ -15,9 +15,9 @@ A professional web-based interface for the Advanced Face Recognition System, des
 
 ## 🛠️ Technology Stack
 
-- **Backend**: Python Flask with your existing `faced.py` face recognition logic
+- **Backend**: Python Flask 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Face Recognition**: OpenCV + face_recognition library (same as your original code)
+- **Face Recognition**: OpenCV + face_recognition library 
 - **Styling**: Custom CSS with modern design principles
 - **Icons**: Font Awesome 6.0
 - **Fonts**: Inter (Google Fonts)
@@ -27,10 +27,10 @@ A professional web-based interface for the Advanced Face Recognition System, des
 ## 📁 File Structure
 
 ```
-├── app.py                    # Python Flask backend (NEW!)
+├── app.py                    # Python Flask backend 
 ├── faced.py                  # Your original face recognition code
-├── requirements.txt          # Python dependencies (NEW!)
-├── run_system.sh            # Integrated system launcher (NEW!)
+├── requirements.txt          # Python dependencies 
+├── run_system.sh            # Integrated system launcher 
 ├── index.html               # Main HTML interface
 ├── styles.css               # Professional styling and layout
 ├── script.js                # Interactive functionality (updated for backend)
@@ -46,7 +46,6 @@ A professional web-based interface for the Advanced Face Recognition System, des
 ## 🚀 Quick Start
 
 ### **Option 1: Integrated Python Backend (Recommended)**
-**This uses your real `faced.py` logic for accurate face recognition!**
 
 1. **Run the integrated system:**
    ```bash
@@ -90,7 +89,6 @@ A professional web-based interface for the Advanced Face Recognition System, des
 ## 🎯 System Overview
 
 ### **Real Face Recognition Backend**
-The system now uses your exact `faced.py` logic:
 - **Same face detection algorithm** (HOG + CNN Hybrid)
 - **Same known faces database** (Muskan, Narendra Modi, Mahak, Amit Shah)
 - **Same recognition accuracy** and tolerance levels
@@ -113,7 +111,7 @@ The system loads the same 4 authorized personnel:
 ## 🎮 How to Use
 
 ### **1. System Initialization**
-- The system automatically loads your known faces from `faced.py`
+- The system automatically loads known faces
 - System status shows "Online" with green indicator
 - Activity log displays initialization progress
 - Backend connects and loads face recognition models
@@ -144,26 +142,6 @@ The system loads the same 4 authorized personnel:
 - **Professional presentation** suitable for defense forces
 
 ## 🎨 Customization Options
-
-### **Adding New Known Faces**
-Edit the `load_known_faces()` function in `app.py`:
-```python
-# Add new person
-person5_img = face_recognition.load_image_file("new_person.jpg")
-person5_encoding = face_recognition.face_encodings(person5_img)[0]
-known_encodings.append(person5_encoding)
-known_names.append("New Person Name")
-```
-
-### **Modifying Test Images**
-Update the `get_test_images()` function in `app.py`:
-```python
-test_images = [
-    "your_image1.jpg",
-    "your_image2.png",
-    # Add more test images
-]
-```
 
 ### **Adjusting Recognition Parameters**
 Modify the face comparison logic in `process_image_with_faces()`:
@@ -242,19 +220,3 @@ Potential improvements for production use:
 - **Export Features**: PDF reports and data export
 - **API Endpoints**: RESTful API for system integration
 - **Multi-language Support**: Internationalization features
-
-## 📞 Support
-
-For technical support or customization requests:
-- Review the code comments for implementation details
-- Check browser console for error messages
-- Ensure all dependencies are properly loaded
-- Verify Python backend is running correctly
-
-## 📄 License
-
-This project is created for defense forces presentation purposes. All rights reserved.
-
----
-
-**Note**: This system now combines your proven face recognition logic with a professional web interface. The backend uses the exact same algorithms from your `faced.py` file, ensuring the same accuracy and reliability while providing an impressive visual presentation suitable for defense forces demonstrations.
